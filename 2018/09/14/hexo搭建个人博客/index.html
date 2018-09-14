@@ -5,20 +5,20 @@
   
 
   
-  <title>hexo搭建个人博客 | Zzzack&#39;s blogs</title>
+  <title>Zzzack&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 create git bash">
+  <meta name="description" content="hexo搭建个人博客步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 crea">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo搭建个人博客">
+<meta property="og:title" content="Zzzack&#39;s blogs">
 <meta property="og:url" content="http://yoursite.com/2018/09/14/hexo搭建个人博客/index.html">
 <meta property="og:site_name" content="Zzzack&#39;s blogs">
-<meta property="og:description" content="步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 create git bash">
+<meta property="og:description" content="hexo搭建个人博客步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 crea">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/09/14/hexo搭建个人博客/hexo_images/1.bmp">
-<meta property="og:updated_time" content="2018-09-14T08:50:11.743Z">
+<meta property="og:updated_time" content="2018-09-14T08:59:47.246Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo搭建个人博客">
-<meta name="twitter:description" content="步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 create git bash">
+<meta name="twitter:title" content="Zzzack&#39;s blogs">
+<meta name="twitter:description" content="hexo搭建个人博客步骤： 安装git bash 安装nodeJS 安装hexo 生成ssh并添加到github 部署项目 上传到github  1. 安装 git bash用于类似cmd的各种命令。 下载地址 2. 安装nodeJShexo是基于nodeJS环境的静态博客，里面的npm工具很有用。下载地址 3. 安装hexo 创建一个文件夹，用来存放blog内容，然后在该文件夹下右击 crea">
 <meta name="twitter:image" content="http://yoursite.com/2018/09/14/hexo搭建个人博客/hexo_images/1.bmp">
   
     <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
@@ -78,19 +78,10 @@
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      hexo搭建个人博客
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
+        <hr>
+<h2 id="hexo搭建个人博客"><a href="#hexo搭建个人博客" class="headerlink" title="hexo搭建个人博客"></a>hexo搭建个人博客</h2><h3 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h3><ol>
 <li>安装git bash</li>
 <li>安装nodeJS</li>
 <li>安装hexo</li>
@@ -106,19 +97,16 @@
 <li>安装hexo命令：<code>npm i -g hexo</code></li>
 <li><p>初始化：<code>hexo init</code></p>
 <p> <img src="/2018/09/14/hexo搭建个人博客/hexo_images/1.bmp" alt="image"></p>
-<p> <strong>注：如何插入本地图片：</strong></p>
 </li>
 </ol>
+<p><strong>注：如何插入本地图片：</strong></p>
 <pre><code>1. 在 \_config.yml文件修改：
    `post_asset_folder: true`
 2. hexo n &quot;article name&quot;时会生成一个article name.cmd和同名文件夹（用来存储图片等）
 3. 插入图片：
     `![任意名字](/article-name/image.jp)`
-
-
-**注：hexo目录解释：**
-
-1. **.deploy_git**: 用于部署到github
+</code></pre><p><strong>注：hexo目录解释：</strong></p>
+<pre><code>1. **.deploy_git**: 用于部署到github
 2. **node_modules**: 依赖包
 3. **public**: 存放生成的页面
 4. **scaffolds**: 命令生成文章等的模板
@@ -127,9 +115,8 @@
 7. **\_config.yml**: 博客配置文件
 8. **db.json**: source解析得到的结果
 9. **package.json**: 项目所需模块的配置信息
-
-**以上最常用的也就**source**文件夹**
-</code></pre><h2 id="4-生成ssh添加到并添加到github"><a href="#4-生成ssh添加到并添加到github" class="headerlink" title="4. 生成ssh添加到并添加到github"></a>4. 生成ssh添加到并添加到github</h2><p>接下来就是搭桥到github。</p>
+</code></pre><p><strong>以上最常用的也就</strong>source<strong>文件夹</strong></p>
+<h2 id="4-生成ssh添加到并添加到github"><a href="#4-生成ssh添加到并添加到github" class="headerlink" title="4. 生成ssh添加到并添加到github"></a>4. 生成ssh添加到并添加到github</h2><p>接下来就是搭桥到github。</p>
 <ol>
 <li><p>new repository</p>
 <ol>
@@ -173,7 +160,7 @@ hexo s //创建本地服务器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjm1rqian0000mkr656wxr1lb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjm1rv4qa0000j4r6e0ifn6s3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +199,7 @@ hexo s //创建本地服务器
       <ul>
         
           <li>
-            <a href="/2018/09/14/hexo搭建个人博客/">hexo搭建个人博客</a>
+            <a href="/2018/09/14/hexo搭建个人博客/">(no title)</a>
           </li>
         
       </ul>
