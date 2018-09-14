@@ -112,6 +112,7 @@
 3. 插入图片：
     `![任意名字](/article-name/image.jp)`
 
+
 **注：hexo目录解释**
 
 1. **.deploy_git**: 用于部署到github
@@ -146,8 +147,7 @@
 <p> 打开用户的 settings-&gt; SSH and GPG keys-&gt; New SSH key, title 随便取， key就是刚才复制的内容。（<em>此时会收到一封邮件提醒你创建了一个ssh</em>）</p>
 </li>
 </ol>
-<p>##5. 部署项目</p>
-<p>修改_config.yml：</p>
+<h2 id="5-部署项目"><a href="#5-部署项目" class="headerlink" title="5. 部署项目"></a>5. 部署项目</h2><p>修改_config.yml：</p>
 <pre><code>deploy:
     type: git
     repository: https://github.com/YourgithubName/YourgithubName.github.io
@@ -157,9 +157,12 @@
 hexo s //创建本地服务器
 </code></pre><p>上传到github：</p>
 <ol>
-<li>先安装部署插件：<br> <code>npm install hexo-deployer-git --save</code></li>
+<li><p>先安装部署插件：</p>
+<p> <code>npm install hexo-deployer-git --save</code></p>
+</li>
 <li><p>执行命令：</p>
-<p>hexo g<br>hexo d //部署到个人网站(yourname.github.io)</p>
+<p> <code>hexo g</code></p>
+<p> <code>hexo d //部署到github</code></p>
 </li>
 </ol>
 <p><strong><em>以上仅仅是创建个人博客的基本步骤</em></strong></p>
@@ -167,7 +170,7 @@ hexo s //创建本地服务器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjm1r1a2v0000kkr6s7qp1uiz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjm1re77z0000q4r6j5s5math" class="article-share-link">Share</a>
       
       
     </footer>
