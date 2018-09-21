@@ -87,37 +87,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>文献题目如下：</p>
-<p>####<em>[1] 2002 ICIP Face photo recognition using sketch</em></p>
-<p>####<em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></p>
-<p>####<em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></p>
-<p>本周刚入实验室，粗略地阅读张老师推荐的三篇论文，了解一下研究方向。</p>
+<h5 id="1-2002-ICIP-Face-photo-recognition-using-sketch"><a href="#1-2002-ICIP-Face-photo-recognition-using-sketch" class="headerlink" title="[1] 2002 ICIP Face photo recognition using sketch"></a><em>[1] 2002 ICIP Face photo recognition using sketch</em></h5><h5 id="2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition"><a href="#2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition" class="headerlink" title="[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition"></a><em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></h5><h5 id="3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis"><a href="#3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis" class="headerlink" title="[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis"></a><em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></h5><p>本周刚入实验室，粗略地阅读张老师推荐的三篇论文，了解一下研究方向。</p>
 <ol>
 <li>大方向：人脸识别（face recognition)</li>
 <li>小方向：基于素描图像的方法（based on sketch)</li>
 </ol>
 <p><strong>背景</strong>：<br>以往人脸识别都是基于原始图片（based on photo）识别，但当要识别一个嫌疑犯，而又没有照片时只能用根据目击者描述画出素描画像（sketch）代替。因此需要<strong>将拍摄到的原始图片转换为素描图片，再与素描图库对比检索</strong>。</p>
 <p><strong>论文主要内容</strong>：</p>
-<p>####<em>[1] 2002 ICIP Face photo recognition using sketch</em></p>
-<ol>
+<h5 id="1-2002-ICIP-Face-photo-recognition-using-sketch-1"><a href="#1-2002-ICIP-Face-photo-recognition-using-sketch-1" class="headerlink" title="[1] 2002 ICIP Face photo recognition using sketch"></a><em>[1] 2002 ICIP Face photo recognition using sketch</em></h5><ol>
 <li>提取人脸特征的传统方法(Conventional eigenface method):KLT</li>
 <li>基于素描的方法(Eigensketch transformation)</li>
 </ol>
-<p>####<em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></p>
-<p>该论文分为两大工作：<strong>转换</strong> 和 <strong>识别</strong></p>
+<h5 id="2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition-1"><a href="#2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition-1" class="headerlink" title="[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition"></a><em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></h5><p>该论文分为两大工作：<strong>转换</strong> 和 <strong>识别</strong></p>
 <ol>
 <li>转换：该论文是基于<strong>LLE</strong>方法，用 photo-sketch pair 训练集训练出来的<strong>模型（P)</strong> 自动生成 pseudo-sketch。</li>
 <li>识别：由于画家画的素描难免有偏差，以及pseudo-sketch会有模糊，因此用<strong>KNDA</strong>方法。</li>
 </ol>
 <p><strong>问题</strong>：LLE，linear v.s nonlinear 等知识点还未了解。</p>
-<p>####<em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></p>
-<p><strong>Data-driven</strong>:<br>data-driven 是在模块水平（<strong>patch level</strong>）进行训练的，模型包括两个：Neighbor Selection Model, Neighbor Fusion Model（如下图）<br>作者列举了许多data-driven 的方法，说明了其劣势所在：在选择Neighbor Selection Model 时要遍历整个training photo-sketch pairs, 耗时太大。<br><img src="https://img-blog.csdn.net/20180921153148260?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
+<h5 id="3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis-1"><a href="#3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis-1" class="headerlink" title="[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis"></a><em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></h5><p><strong>Data-driven</strong>:<br>data-driven 是在模块水平（<strong>patch level</strong>）进行训练的，模型包括两个：Neighbor Selection Model, Neighbor Fusion Model（如下图）<br>作者列举了许多data-driven 的方法，说明了其劣势所在：在选择Neighbor Selection Model 时要遍历整个training photo-sketch pairs, 耗时太大。<br><img src="https://img-blog.csdn.net/20180921153148260?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
 <p><strong>问题</strong>：patch division是怎么完成的？——partition mask（如下图）<br><strong>Model driven</strong>:<br>训练：将photo-sketch pairs 分成许多patches，训练出许多Mapping functions.<br>测试：将photo分成许多patches，用训练出的Mapping functions生成对应的sketch。<br><img src="https://img-blog.csdn.net/20180921154638237?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
 <p>只是初步了解一下方向，具体的原理，公式，算法还没有深入了解。阅读中遇到一些不懂的知识点直接跳过，如rigid regression， LLE， KNDA等等。后面会对每一篇再做进一步的阅读和总结。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/文献阅读001/" data-id="cjmbqom4h0000pkr68jdetffu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/文献阅读001/" data-id="cjmbrr98n0001v8r6at676qyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -228,7 +222,7 @@ hexo s //创建本地服务器
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjmbqom4o0001pkr67zcir84f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/14/hexo搭建个人博客/" data-id="cjmbrr98g0000v8r6gkrhna1k" class="article-share-link">Share</a>
       
       
     </footer>
