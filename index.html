@@ -106,11 +106,12 @@
 <p>两边同时左乘P：</p>
 <p><img src="https://img-blog.csdn.net/20180925165206663?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
 <p><img src="https://img-blog.csdn.net/20180925170129673?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>–求<strong>PP^T</strong>的<strong>标准正交化矩阵</strong>：<br>–我们是先用SVD求出<strong>P^TP标准正交化矩阵</strong>的，即Vp，<strong>Vp^-1=Vp^T</strong>。而我们要求的是<strong>PP^T</strong>的标准正交化矩阵，如上面的等式，我们<strong>不能保证PVp是标准正交化矩阵</strong>，因此要对其标准正交化，得到如下，可以验证 <strong>EpEp^T=I</strong>。</p>
+<p>【重要】<br>–求<strong>PP^T</strong>的<strong>标准正交化矩阵</strong>：<br>–我们是先用SVD求出<strong>P^TP标准正交化矩阵</strong>的，即Vp，<strong>Vp^-1=Vp^T</strong>。而我们要求的是<strong>PP^T</strong>的标准正交化矩阵，如上面的等式，我们<strong>不能保证PVp是标准正交化矩阵</strong>，因此要对其标准正交化，得到如下，可以验证 <strong>EpEp^T=I</strong>。</p>
 <p><img src="https://img-blog.csdn.net/20180925170345965?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
 <p>因此，对于一个新的图片Pk，经过Ep的变换后，得到特征向量 bp :</p>
 <p><img src="https://img-blog.csdn.net/20180925180439934?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><strong>2.2. Eigensketch transformation</strong><br>对于上列等式，两边同时左乘Ep，由于Ep是标准正交矩阵，有<strong>Pk=Ep*bp</strong>，但是经过Ep<strong>降维</strong>后，这里的等号实际上是<strong>有损失</strong>的，所以记Pk为Pr，即<strong>重构</strong>的photo：</p>
+<p><strong>2.2. Eigensketch transformation</strong></p>
+<p>【重要】<br>对于上列等式，两边同时左乘Ep，由于Ep是标准正交矩阵，有<strong>Pk=Ep*bp</strong>，但是经过Ep<strong>降维</strong>后，这里的等号实际上是<strong>有损失</strong>的，所以记Pk为Pr，即<strong>重构</strong>的photo：</p>
 <p><img src="https://img-blog.csdn.net/20180925182047933?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
 <p>将Ep代入：</p>
 <p><img src="https://img-blog.csdn.net/20180925182339146?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
@@ -130,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/25/文献阅读002【精读】/" data-id="cjmiwmgbn0001zwr60v7yoz6j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/25/文献阅读002【精读】/" data-id="cjmix6d1m0000cor67ukor4du" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/文献阅读001/" data-id="cjmiwmgbg0000zwr69o1qk612" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/21/文献阅读001/" data-id="cjmix6d1u0001cor6o8evhfly" class="article-share-link">Share</a>
       
       
     </footer>
