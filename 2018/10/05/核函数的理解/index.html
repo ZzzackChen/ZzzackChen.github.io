@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Zzzack&#39;s blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="核函数的理解  &amp;nbsp; 参考： 李航《统计学习方法》  	【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射 \phi(x):X -&amp;gt;F 使得所有的x,z∈X，函数K(x,z)满足条件 K(x,z)=\phi(x)·\phi(z) 则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 	核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zzzack&#39;s blogs">
+<meta property="og:url" content="http://yoursite.com/2018/10/05/核函数的理解/index.html">
+<meta property="og:site_name" content="Zzzack&#39;s blogs">
+<meta property="og:description" content="核函数的理解  &amp;nbsp; 参考： 李航《统计学习方法》  	【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射 \phi(x):X -&amp;gt;F 使得所有的x,z∈X，函数K(x,z)满足条件 K(x,z)=\phi(x)·\phi(z) 则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 	核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-04T16:06:36.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zzzack&#39;s blogs">
+<meta name="twitter:description" content="核函数的理解  &amp;nbsp; 参考： 李航《统计学习方法》  	【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射 \phi(x):X -&amp;gt;F 使得所有的x,z∈X，函数K(x,z)满足条件 K(x,z)=\phi(x)·\phi(z) 则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 	核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义">
+  
+    <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zzzack&#39;s blogs</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives/">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-核函数的理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/05/核函数的理解/" class="article-date">
+  <time datetime="2018-10-04T16:06:36.157Z" itemprop="datePublished">2018-10-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width initial-scale=1">
+<title>核函数的理解</title></head>
+<body>
+<p>&nbsp;</p>
+<p>参考： 李航《统计学习方法》</p>
+<hr>
+<p>	【定义】设<strong>X</strong>是输入空间，又设<strong>F</strong>为特征空间，如果存在一个从<strong>X</strong>到<strong>F</strong>的映射</p>
+<p class="md-math-block"><div contenteditable="false" spellcheck="false" class="mathjax-block md-end-block md-math-block md-rawblock" id="mathjax-n6" cid="n6" mdtype="math_block"><div class="md-rawblock-container md-math-container" tabindex="-1"><span style="white-space:pre;"><span class="MathJax_Preview"></span><span class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="15.079ex" height="2.577ex" viewbox="0 -806.1 6492.1 1109.7" role="img" focusable="false" style="vertical-align: -0.705ex;"><defs><path stroke-width="0" id="E1-MJMATHI-3D5" d="M409 688Q413 694 421 694H429H442Q448 688 448 686Q448 679 418 563Q411 535 404 504T392 458L388 442Q388 441 397 441T429 435T477 418Q521 397 550 357T579 260T548 151T471 65T374 11T279 -10H275L251 -105Q245 -128 238 -160Q230 -192 227 -198T215 -205H209Q189 -205 189 -198Q189 -193 211 -103L234 -11Q234 -10 226 -10Q221 -10 206 -8T161 6T107 36T62 89T43 171Q43 231 76 284T157 370T254 422T342 441Q347 441 348 445L378 567Q409 686 409 688ZM122 150Q122 116 134 91T167 53T203 35T237 27H244L337 404Q333 404 326 403T297 395T255 379T211 350T170 304Q152 276 137 237Q122 191 122 150ZM500 282Q500 320 484 347T444 385T405 400T381 404H378L332 217L284 29Q284 27 285 27Q293 27 317 33T357 47Q400 66 431 100T475 170T494 234T500 282Z"/><path stroke-width="0" id="E1-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/><path stroke-width="0" id="E1-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/><path stroke-width="0" id="E1-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/><path stroke-width="0" id="E1-MJMAIN-3A" d="M78 370Q78 394 95 412T138 430Q162 430 180 414T199 371Q199 346 182 328T139 310T96 327T78 370ZM78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"/><path stroke-width="0" id="E1-MJMATHI-58" d="M42 0H40Q26 0 26 11Q26 15 29 27Q33 41 36 43T55 46Q141 49 190 98Q200 108 306 224T411 342Q302 620 297 625Q288 636 234 637H206Q200 643 200 645T202 664Q206 677 212 683H226Q260 681 347 681Q380 681 408 681T453 682T473 682Q490 682 490 671Q490 670 488 658Q484 643 481 640T465 637Q434 634 411 620L488 426L541 485Q646 598 646 610Q646 628 622 635Q617 635 609 637Q594 637 594 648Q594 650 596 664Q600 677 606 683H618Q619 683 643 683T697 681T738 680Q828 680 837 683H845Q852 676 852 672Q850 647 840 637H824Q790 636 763 628T722 611T698 593L687 584Q687 585 592 480L505 384Q505 383 536 304T601 142T638 56Q648 47 699 46Q734 46 734 37Q734 35 732 23Q728 7 725 4T711 1Q708 1 678 1T589 2Q528 2 496 2T461 1Q444 1 444 10Q444 11 446 25Q448 35 450 39T455 44T464 46T480 47T506 54Q523 62 523 64Q522 64 476 181L429 299Q241 95 236 84Q232 76 232 72Q232 53 261 47Q262 47 267 47T273 46Q276 46 277 46T280 45T283 42T284 35Q284 26 282 19Q279 6 276 4T261 1Q258 1 243 1T201 2T142 2Q64 2 42 0Z"/><path stroke-width="0" id="E1-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/><path stroke-width="0" id="E1-MJMAIN-3E" d="M84 520Q84 528 88 533T96 539L99 540Q106 540 253 471T544 334L687 265Q694 260 694 250T687 235Q685 233 395 96L107 -40H101Q83 -38 83 -20Q83 -19 83 -17Q82 -10 98 -1Q117 9 248 71Q326 108 378 132L626 250L378 368Q90 504 86 509Q84 513 84 520Z"/><path stroke-width="0" id="E1-MJMATHI-46" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"/></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMATHI-3D5" x="0" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-28" x="596" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMATHI-78" x="985" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-29" x="1557" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-3A" x="2223" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMATHI-58" x="2779" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-2212" x="3631" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMAIN-3E" x="4687" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E1-MJMATHI-46" x="5743" y="0"/></g></svg></span></span><script type="math/tex; mode=display" id="MathJax-Element-1">\phi(x):X ->F</script></span></div></div></p>
+<p>使得所有的<strong>x,z∈X</strong>，函数<strong>K(x,z)</strong>满足条件</p>
+<p class="md-math-block"><div contenteditable="false" spellcheck="false" class="mathjax-block md-end-block md-math-block md-rawblock" id="mathjax-n8" cid="n8" mdtype="math_block"><div class="md-rawblock-container md-math-container" tabindex="-1"><span style="white-space:pre;"><span class="MathJax_Preview"></span><span class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-2-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="20.893ex" height="2.577ex" viewbox="0 -806.1 8995.7 1109.7" role="img" focusable="false" style="vertical-align: -0.705ex;"><defs><path stroke-width="0" id="E2-MJMATHI-4B" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"/><path stroke-width="0" id="E2-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/><path stroke-width="0" id="E2-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/><path stroke-width="0" id="E2-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/><path stroke-width="0" id="E2-MJMATHI-7A" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"/><path stroke-width="0" id="E2-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/><path stroke-width="0" id="E2-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/><path stroke-width="0" id="E2-MJMATHI-3D5" d="M409 688Q413 694 421 694H429H442Q448 688 448 686Q448 679 418 563Q411 535 404 504T392 458L388 442Q388 441 397 441T429 435T477 418Q521 397 550 357T579 260T548 151T471 65T374 11T279 -10H275L251 -105Q245 -128 238 -160Q230 -192 227 -198T215 -205H209Q189 -205 189 -198Q189 -193 211 -103L234 -11Q234 -10 226 -10Q221 -10 206 -8T161 6T107 36T62 89T43 171Q43 231 76 284T157 370T254 422T342 441Q347 441 348 445L378 567Q409 686 409 688ZM122 150Q122 116 134 91T167 53T203 35T237 27H244L337 404Q333 404 326 403T297 395T255 379T211 350T170 304Q152 276 137 237Q122 191 122 150ZM500 282Q500 320 484 347T444 385T405 400T381 404H378L332 217L284 29Q284 27 285 27Q293 27 317 33T357 47Q400 66 431 100T475 170T494 234T500 282Z"/><path stroke-width="0" id="E2-MJMAIN-22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"/></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-4B" x="0" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-28" x="889" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-78" x="1278" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-2C" x="1850" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-7A" x="2294" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-29" x="2762" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-3D" x="3429" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-3D5" x="4485" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-28" x="5081" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-78" x="5470" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-29" x="6042" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-22C5" x="6653" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-3D5" x="7153" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-28" x="7749" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMATHI-7A" x="8138" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E2-MJMAIN-29" x="8606" y="0"/></g></svg></span></span><script type="math/tex; mode=display" id="MathJax-Element-2">K(x,z)=\phi(x)·\phi(z)</script></span></div></div></p>
+<p>则称<strong>K(x,z)</strong>为<strong>核函数</strong>，<strong>Φ(x)</strong>为映射函数，<strong>·</strong> 为内积运算。</p>
+<p>	核函数的想法是，在学习与预测中只定义核函数<strong>K(x,z)</strong>，而不显式地定义<strong>Φ</strong>。直接计算<strong>K(x,z)</strong>比较容易，而通过<strong>Φ(x)</strong>,<strong>Φ(z)</strong>计算<strong>K(x,z)</strong>并不容易。</p>
+<p>	【注意】特征空间<strong>F</strong>一般是高维的，对于给定的<strong>K(x,z)</strong>，<strong>F</strong>和<strong>Φ</strong>的取法并不唯一。</p>
+<hr>
+<p>常用的核函数：</p>
+<ol start="">
+<li><p>多项式核函数(<strong>polynomial kernel function</strong>)</p>
+<p class="md-math-block"><div contenteditable="false" spellcheck="false" class="mathjax-block md-end-block md-math-block md-rawblock" id="mathjax-n17" cid="n17" mdtype="math_block"><div class="md-rawblock-container md-math-container" tabindex="-1"><span style="white-space:pre;"><span class="MathJax_Preview"></span><span class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-3-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="21.377ex" height="2.577ex" viewbox="0 -806.1 9203.8 1109.7" role="img" focusable="false" style="vertical-align: -0.705ex;"><defs><path stroke-width="0" id="E3-MJMATHI-4B" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"/><path stroke-width="0" id="E3-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/><path stroke-width="0" id="E3-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/><path stroke-width="0" id="E3-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/><path stroke-width="0" id="E3-MJMATHI-7A" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"/><path stroke-width="0" id="E3-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/><path stroke-width="0" id="E3-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/><path stroke-width="0" id="E3-MJMAIN-22C5" d="M78 250Q78 274 95 292T138 310Q162 310 180 294T199 251Q199 226 182 208T139 190T96 207T78 250Z"/><path stroke-width="0" id="E3-MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"/><path stroke-width="0" id="E3-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"/><path stroke-width="0" id="E3-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-4B" x="0" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-28" x="889" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-78" x="1278" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-2C" x="1850" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-7A" x="2294" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-29" x="2762" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-3D" x="3429" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-28" x="4485" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-78" x="4874" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-22C5" x="5668" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-7A" x="6168" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-2B" x="6858" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-31" x="7859" y="0"/><g transform="translate(8359,0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMAIN-29" x="0" y="0"/><use transform="scale(0.707)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E3-MJMATHI-70" x="550" y="583"/></g></g></svg></span></span><script type="math/tex; mode=display" id="MathJax-Element-3">K(x,z)=(x·z+1)^p</script></span></div></div></p>
+</li>
+<li><p>高斯核函数(<strong>Guussian kernel function</strong>)</p>
+<p class="md-math-block"><div contenteditable="false" spellcheck="false" class="mathjax-block md-end-block md-math-block md-rawblock" id="mathjax-n20" cid="n20" mdtype="math_block"><div class="md-rawblock-container md-math-container" tabindex="-1"><span style="white-space:pre;"><span class="MathJax_Preview"></span><span class="MathJax_SVG_Display" style="text-align: center;"><span class="MathJax_SVG" id="MathJax-Element-4-Frame" tabindex="-1" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="27.337ex" height="5.963ex" viewbox="0 -1761.1 11770.2 2567.2" role="img" focusable="false" style="vertical-align: -1.872ex;"><defs><path stroke-width="0" id="E4-MJMATHI-4B" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"/><path stroke-width="0" id="E4-MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"/><path stroke-width="0" id="E4-MJMATHI-78" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"/><path stroke-width="0" id="E4-MJMAIN-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"/><path stroke-width="0" id="E4-MJMATHI-7A" d="M347 338Q337 338 294 349T231 360Q211 360 197 356T174 346T162 335T155 324L153 320Q150 317 138 317Q117 317 117 325Q117 330 120 339Q133 378 163 406T229 440Q241 442 246 442Q271 442 291 425T329 392T367 375Q389 375 411 408T434 441Q435 442 449 442H462Q468 436 468 434Q468 430 463 420T449 399T432 377T418 358L411 349Q368 298 275 214T160 106L148 94L163 93Q185 93 227 82T290 71Q328 71 360 90T402 140Q406 149 409 151T424 153Q443 153 443 143Q443 138 442 134Q425 72 376 31T278 -11Q252 -11 232 6T193 40T155 57Q111 57 76 -3Q70 -11 59 -11H54H41Q35 -5 35 -2Q35 13 93 84Q132 129 225 214T340 322Q352 338 347 338Z"/><path stroke-width="0" id="E4-MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"/><path stroke-width="0" id="E4-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"/><path stroke-width="0" id="E4-MJMATHI-65" d="M39 168Q39 225 58 272T107 350T174 402T244 433T307 442H310Q355 442 388 420T421 355Q421 265 310 237Q261 224 176 223Q139 223 138 221Q138 219 132 186T125 128Q125 81 146 54T209 26T302 45T394 111Q403 121 406 121Q410 121 419 112T429 98T420 82T390 55T344 24T281 -1T205 -11Q126 -11 83 42T39 168ZM373 353Q367 405 305 405Q272 405 244 391T199 357T170 316T154 280T149 261Q149 260 169 260Q282 260 327 284T373 353Z"/><path stroke-width="0" id="E4-MJMATHI-70" d="M23 287Q24 290 25 295T30 317T40 348T55 381T75 411T101 433T134 442Q209 442 230 378L240 387Q302 442 358 442Q423 442 460 395T497 281Q497 173 421 82T249 -10Q227 -10 210 -4Q199 1 187 11T168 28L161 36Q160 35 139 -51T118 -138Q118 -144 126 -145T163 -148H188Q194 -155 194 -157T191 -175Q188 -187 185 -190T172 -194Q170 -194 161 -194T127 -193T65 -192Q-5 -192 -24 -194H-32Q-39 -187 -39 -183Q-37 -156 -26 -148H-6Q28 -147 33 -136Q36 -130 94 103T155 350Q156 355 156 364Q156 405 131 405Q109 405 94 377T71 316T59 280Q57 278 43 278H29Q23 284 23 287ZM178 102Q200 26 252 26Q282 26 310 49T356 107Q374 141 392 215T411 325V331Q411 405 350 405Q339 405 328 402T306 393T286 380T269 365T254 350T243 336T235 326L232 322Q232 321 229 308T218 264T204 212Q178 106 178 102Z"/><path stroke-width="0" id="E4-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"/><path stroke-width="0" id="E4-MJMAIN-7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"/><path stroke-width="0" id="E4-MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"/><path stroke-width="0" id="E4-MJMATHI-3C3" d="M184 -11Q116 -11 74 34T31 147Q31 247 104 333T274 430Q275 431 414 431H552Q553 430 555 429T559 427T562 425T565 422T567 420T569 416T570 412T571 407T572 401Q572 357 507 357Q500 357 490 357T476 358H416L421 348Q439 310 439 263Q439 153 359 71T184 -11ZM361 278Q361 358 276 358Q152 358 115 184Q114 180 114 178Q106 141 106 117Q106 67 131 47T188 26Q242 26 287 73Q316 103 334 153T356 233T361 278Z"/></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-4B" x="0" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-28" x="889" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-78" x="1278" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-2C" x="1850" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-7A" x="2294" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-29" x="2762" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-3D" x="3429" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-65" x="4485" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-78" x="4951" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-70" x="5523" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-28" x="6026" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-2212" x="6415" y="0"/><g transform="translate(7193,0)"><g transform="translate(120,0)"><rect stroke="none" width="3947" height="60" x="0" y="220"/><g transform="translate(60,714)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-7C" x="0" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-7C" x="278" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-78" x="556" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-2212" x="1350" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-7A" x="2350" y="0"/><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-7C" x="2818" y="0"/><g transform="translate(3096,0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-7C" x="0" y="0"/><use transform="scale(0.707)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-32" x="393" y="674"/></g></g><g transform="translate(1211,-726)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-32" x="0" y="0"/><g transform="translate(500,0)"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMATHI-3C3" x="0" y="0"/><use transform="scale(0.707)" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-32" x="809" y="408"/></g></g></g></g><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#E4-MJMAIN-29" x="11381" y="0"/></g></svg></span></span><script type="math/tex; mode=display" id="MathJax-Element-4">K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})</script></span></div></div></p>
+<table><tbody><tr><td bgcolor="lightgray">【<font color="red">个人理解</font>】这些常用的核函数，我尚未去验证，但姑且这样理解：X-&gt;F的路径不唯一(F也可以不同)，即Φ可以有千变万化的选择，那我们只要可以从核函数推导出其中一种Φ即可验证该核函数是合理的。而为什么这些核函数比较常用，即这些核函数的特点和优点在哪里，我暂时不去研讨。</td></tr></tbody></table>
+<p>可了解一下《统计学习方法》的“正定核”。</p>
+</li>
+
+</ol>
+<hr>
+<p>核函数的应用：</p>
+<p>见文章《PCA与LLE的理解》中的kernel PCA</p>
+<p>见文章《LDA的理解》中的kernel LDA</p>
+<p>&nbsp;</p>
+</body>
+</html>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/05/核函数的理解/" data-id="cjmurwu830001fcr6hartkivs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/05/PCA与LLE的理解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/05/文献阅读003【精读】/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/05/文献阅读003【精读】1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/PCA与LLE的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/核函数的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/文献阅读003【精读】/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/04/LDA 的理解/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 zkchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives/" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

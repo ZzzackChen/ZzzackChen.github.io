@@ -7,19 +7,19 @@
   
   <title>LLE (locally linear embedding) | Zzzack&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+  <meta name="description" content="LLE (locally linear embedding)参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LLE (locally linear embedding)">
 <meta property="og:url" content="http://yoursite.com/2018/09/30/PCA与LLE的理解/index.html">
 <meta property="og:site_name" content="Zzzack&#39;s blogs">
-<meta property="og:description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+<meta property="og:description" content="LLE (locally linear embedding)参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png">
 <meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109201731541-419567891.jpg">
-<meta property="og:updated_time" content="2018-10-04T14:59:00.346Z">
+<meta property="og:updated_time" content="2018-10-04T16:22:55.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LLE (locally linear embedding)">
-<meta name="twitter:description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+<meta name="twitter:description" content="LLE (locally linear embedding)参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。">
 <meta name="twitter:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png">
   
     <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
@@ -89,7 +89,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考： <a href="https://www.cnblogs.com/pinard/p/6266408.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">LLE原理总结</a></p>
+        <h1 id="LLE-locally-linear-embedding"><a href="#LLE-locally-linear-embedding" class="headerlink" title="LLE (locally linear embedding)"></a>LLE (locally linear embedding)</h1><p>参考： <a href="https://www.cnblogs.com/pinard/p/6266408.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">LLE原理总结</a></p>
 <h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p><strong>PCA 降维的缺陷</strong>：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。<br><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png" alt=""></p>
 <p>因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。</p>
 <p><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109201731541-419567891.jpg" alt=""></p>
@@ -112,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/30/PCA与LLE的理解/" data-id="cjmuqah2d0001lgr62aqzfv93" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/09/30/PCA与LLE的理解/" data-id="cjmuqjdve00015wr6pgx8huk6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,23 +170,23 @@
       <ul>
         
           <li>
+            <a href="/2018/10/05/文献阅读003【精读】1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/PCA与LLE的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/核函数的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/文献阅读003【精读】/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/10/04/LDA 的理解/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/04/核函数的理解/">核函数的理解</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/03/LDA 的理解/">LDA与KNDA的理解</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/30/PCA与LLE的理解/">LLE (locally linear embedding)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/28/文献阅读003【精读】/">文献阅读003【精读】</a>
           </li>
         
       </ul>

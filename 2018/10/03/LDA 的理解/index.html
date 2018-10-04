@@ -7,17 +7,17 @@
   
   <title>LDA与KNDA的理解 | Zzzack&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+  <meta name="description" content="LDA与KNDA的理解参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LDA与KNDA的理解">
 <meta property="og:url" content="http://yoursite.com/2018/10/03/LDA 的理解/index.html">
 <meta property="og:site_name" content="Zzzack&#39;s blogs">
-<meta property="og:description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+<meta property="og:description" content="LDA与KNDA的理解参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-04T15:18:44.447Z">
+<meta property="og:updated_time" content="2018-10-04T16:22:32.682Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LDA与KNDA的理解">
-<meta name="twitter:description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+<meta name="twitter:description" content="LDA与KNDA的理解参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其">
   
     <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
   
@@ -86,13 +86,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考：<a href="https://blog.csdn.net/daunxx/article/details/51881956#%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90linear-discriminant-analysis" target="_blank" rel="noopener">LDA </a>  <a href="https://blog.csdn.net/lizhe_dashuju/article/details/50329663" target="_blank" rel="noopener">kernel LDA</a></p>
-<p>kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：<br>$$<br> J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\<br>\begin{align}<br>其中，&amp;\phi 表示高维空间下的;\<br>&amp;S_b^\phi类间散度，S_b^\phi=\sum_{i=1}^{C}N_i(\mu_i-\mu)(\mu_i-\mu)^T; \<br>&amp;S_w^\phi类内散度，S_w^\phi=\sum_{i=1}^{C}\sum_{\phi(x_j)∈X_i}(\phi(x_j)-\mu_i)(\phi(x_j)-\mu_i)^T;\<br>&amp;W^\phi是单位正交化的特征向量矩阵，即高维空间中的坐标轴w^\phi，\<br>&amp;w^\phi=\sum_{i=1}^N\alpha_i\phi(x_i)这是未知的，难以直接计算的，需要借助核函数。\<br>\end{align}<br>$$<br>将核函数引入之后：<br>$$<br>J(\alpha)=argmax_{(\alpha)}\frac{|\alpha^TG_b\alpha|}{|\alpha^TG_w\alpha|}\<br>\begin{align}<br>其中，&amp;G_b=\sum_{i=1}^{C}N_i(m_i-\overline m)(m_i-\overline m)^T\<br>&amp;G_w=\sum_{i=1}^{C}\sum_{K_j∈X_i}(K_j-m_i)(K_j-m_i)^T\<br>&amp;m_i=\frac{1}{N_i}\sum_{j=1}{N_i}K_j\<br>&amp;K_j=(k(x_i,x_1),…,k(x_i,x_N))^T&amp;K_j为核函数矩阵的一个列向量<br>\end{align}\<br>$$</p>
+        <h1 id="LDA与KNDA的理解"><a href="#LDA与KNDA的理解" class="headerlink" title="LDA与KNDA的理解"></a>LDA与KNDA的理解</h1><p>参考：<a href="https://blog.csdn.net/daunxx/article/details/51881956#%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90linear-discriminant-analysis" target="_blank" rel="noopener">LDA </a>  <a href="https://blog.csdn.net/lizhe_dashuju/article/details/50329663" target="_blank" rel="noopener">kernel LDA</a></p>
+<p>kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：<br>$$<br>J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\<br>\begin{align}<br>其中，&amp;\phi 表示高维空间下的;\<br>&amp;S_b^\phi类间散度，S_b^\phi=\sum_{i=1}^{C}N_i(\mu_i-\mu)(\mu_i-\mu)^T; \<br>&amp;S_w^\phi类内散度，S_w^\phi=\sum_{i=1}^{C}\sum_{\phi(x_j)∈X_i}(\phi(x_j)-\mu_i)(\phi(x_j)-\mu_i)^T;\<br>&amp;W^\phi是单位正交化的特征向量矩阵，即高维空间中的坐标轴w^\phi，\<br>&amp;w^\phi=\sum_{i=1}^N\alpha_i\phi(x_i)这是未知的，难以直接计算的，需要借助核函数。\<br>\end{align}<br>$$<br>将核函数引入之后：<br>$$<br>J(\alpha)=argmax_{(\alpha)}\frac{|\alpha^TG_b\alpha|}{|\alpha^TG_w\alpha|}\<br>\begin{align}<br>其中，&amp;G_b=\sum_{i=1}^{C}N_i(m_i-\overline m)(m_i-\overline m)^T\<br>&amp;G_w=\sum_{i=1}^{C}\sum_{K_j∈X_i}(K_j-m_i)(K_j-m_i)^T\<br>&amp;m_i=\frac{1}{N_i}\sum_{j=1}{N_i}K_j\<br>&amp;K_j=(k(x_i,x_1),…,k(x_i,x_N))^T&amp;K_j为核函数矩阵的一个列向量<br>\end{align}\<br>$$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/03/LDA 的理解/" data-id="cjmuqah2d0000lgr6ja1bnv25" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/03/LDA 的理解/" data-id="cjmuqjduy00005wr68iltcjim" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,23 +150,23 @@
       <ul>
         
           <li>
+            <a href="/2018/10/05/文献阅读003【精读】1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/PCA与LLE的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/核函数的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/文献阅读003【精读】/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/10/04/LDA 的理解/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/04/核函数的理解/">核函数的理解</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/03/LDA 的理解/">LDA与KNDA的理解</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/30/PCA与LLE的理解/">LLE (locally linear embedding)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/28/文献阅读003【精读】/">文献阅读003【精读】</a>
           </li>
         
       </ul>
