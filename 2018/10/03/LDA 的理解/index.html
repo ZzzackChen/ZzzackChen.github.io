@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LDA与KNDA的理解· | Zzzack&#39;s blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LDA与KNDA的理解·">
+<meta property="og:url" content="http://yoursite.com/2018/10/03/LDA 的理解/index.html">
+<meta property="og:site_name" content="Zzzack&#39;s blogs">
+<meta property="og:description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-04T15:09:35.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LDA与KNDA的理解·">
+<meta name="twitter:description" content="参考：LDA   kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：$$ J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\\begin{align}其中，&amp;amp;\ph">
+  
+    <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zzzack&#39;s blogs</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives/">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-LDA 的理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/03/LDA 的理解/" class="article-date">
+  <time datetime="2018-10-03T02:50:01.011Z" itemprop="datePublished">2018-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LDA与KNDA的理解·
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考：<a href="https://blog.csdn.net/daunxx/article/details/51881956#%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90linear-discriminant-analysis" target="_blank" rel="noopener">LDA </a>  <a href="https://blog.csdn.net/lizhe_dashuju/article/details/50329663" target="_blank" rel="noopener">kernel LDA</a></p>
+<p>kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：<br>$$<br> J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\<br>\begin{align}<br>其中，&amp;\phi 表示高维空间下的;\<br>&amp;S_b^\phi类间散度，S_b^\phi=\sum_{i=1}^{C}N_i(\mu_i-\mu)(\mu_i-\mu)^T; \<br>&amp;S_w^\phi类内散度，S_w^\phi=\sum_{i=1}^{C}\sum_{\phi(x_j)∈X_i}(\phi(x_j)-\mu_i)(\phi(x_j)-\mu_i)^T;\<br>&amp;W^\phi是单位正交化的特征向量矩阵，即高维空间中的坐标轴w^\phi，\<br>&amp;w^\phi=\sum_{i=1}^N\alpha_i\phi(x_i)这是未知的，难以直接计算的，需要借助核函数。\<br>\end{align}<br>$$<br>将核函数引入之后：<br>$$<br>J(\alpha)=argmax_{(\alpha)}\frac{|\alpha^TG_b\alpha|}{|\alpha^TG_w\alpha|}\<br>\begin{align}<br>其中，&amp;G_b=\sum_{i=1}^{C}N_i(m_i-\overline m)(m_i-\overline m)^T\<br>&amp;G_w=\sum_{i=1}^{C}\sum_{K_j∈X_i}(K_j-m_i)(K_j-m_i)^T\<br>&amp;m_i=\frac{1}{N_i}\sum_{j=1}{N_i}K_j\<br>&amp;K_j=(k(x_i,x_1),…,k(x_i,x_N))^T&amp;K_j为核函数矩阵的一个列向量<br>\end{align}\<br>$$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/03/LDA 的理解/" data-id="cjmupgavi0000t8r6mtb0omzv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/04/核函数的理解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          核函数的理解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/30/PCA与LLE的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">LLE (locally linear embedding)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/04/LDA 的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/04/核函数的理解/">核函数的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/03/LDA 的理解/">LDA与KNDA的理解·</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/30/PCA与LLE的理解/">LLE (locally linear embedding)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/28/文献阅读003【精读】/">文献阅读003【精读】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 zkchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives/" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

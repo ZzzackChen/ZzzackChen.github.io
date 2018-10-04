@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>LLE (locally linear embedding) | Zzzack&#39;s blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLE (locally linear embedding)">
+<meta property="og:url" content="http://yoursite.com/2018/09/30/PCA与LLE的理解/index.html">
+<meta property="og:site_name" content="Zzzack&#39;s blogs">
+<meta property="og:description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png">
+<meta property="og:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109201731541-419567891.jpg">
+<meta property="og:updated_time" content="2018-10-04T14:50:29.948Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LLE (locally linear embedding)">
+<meta name="twitter:description" content="参考： LLE原理总结 个人理解PCA 降维的缺陷：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。 因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。  LLE 算法： 与 PCA 不同的是，LLE 保留了高维">
+<meta name="twitter:image" content="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Zzzack&#39;s blogs</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives/">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-PCA与LLE的理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/30/PCA与LLE的理解/" class="article-date">
+  <time datetime="2018-09-30T06:49:17.849Z" itemprop="datePublished">2018-09-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LLE (locally linear embedding)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考： <a href="https://www.cnblogs.com/pinard/p/6266408.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">LLE原理总结</a></p>
+<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p><strong>PCA 降维的缺陷</strong>：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。<br><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png" alt=""></p>
+<p>因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。</p>
+<p><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109201731541-419567891.jpg" alt=""></p>
+<p><strong>LLE 算法</strong>：</p>
+<p>与 PCA 不同的是，LLE 保留了高维空间的局部线性关系。<br>LLE在降维之前，先训练出每个样本与其最近的k个样本的线性关系——weights，再把该线性关系套用在降维空间后的每个样本。</p>
+<hr>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>参考：<a href="https://blog.csdn.net/baimafujinji/article/details/79376378" target="_blank" rel="noopener">PCA与kernel PCA</a></p>
+<p>【关于降维/冗余】</p>
+<p>如何理解冗余？</p>
+<p>如二维平面上，y=x 附近的数据点有很强的线性相关性，也就是说其中一维是冗余的，我们只要知道其中一维，就可以推出另一维，因此可以进行降维，对于本例可以进行平移+旋转，使其分布在x轴上。</p>
+<p>如何用数学来表示这种思想？</p>
+<p><strong>方差/协方差</strong>最大化，即投影后的点之间方差最大。方差和协方差的关系：当数据点<strong>归一化和中心化</strong>后，二者最大化的方法是等价的，一般直接求<strong>协方差</strong>的最大化。具体参考链接的公式推导。</p>
+<p>【kernel PCA】</p>
+<p>假设<strong>K</strong>是已知的。</p>
+<p>与上面的一样，我们同样要求<strong>协方差</strong>的最大化，<br>$$<br>\begin{align}<br>C&amp;=\sum_{i=1}^{N}\phi(x_i)\phi(x_i^T)\<br> &amp;=[\phi(x_1),…,\phi(x_N)]\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}\<br> &amp;=X^TX\</p>
+<p>\end{align}<br>$$</p>
+<p>但是，Φ是未知的，或者难以计算的，因此我们设法借助核函数来求解.<br>$$<br>\begin{align}<br>K&amp;=XX^T\<br>&amp;=\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}[\phi(x_1),…,\phi(x_N)]\<br>&amp;=\begin{bmatrix}\phi(x_1)^T\phi(x_1) &amp;… &amp;\phi(x_1)^T\phi(x_N)\<br>…&amp;…&amp;…\<br>\phi(x_N)^T\phi(x_1)&amp;…&amp;\phi(x_N)^T\phi(x_N)\end{bmatrix}\<br>&amp;=\begin{bmatrix}K(x_1,x_1) &amp;… &amp;K(x_1,x_N)\<br>…&amp;…&amp;…\<br>K(x_N,x_1)&amp;…&amp;K(x_N,x_N)\end{bmatrix}<br>\end{align}<br>$$<br>【注意】这里的K=XX^T和要求的协方差X^TX并不相等，但二者肯定存在某种关系：<br>$$<br>\begin{align}<br>XX^Tu&amp;=\lambda u&amp;u为单位化的特征向量\<br>X^TX(X^Tu)&amp;=\lambda (X^Tu) &amp;X^Tu为特征向量，但不一定是单位化的\<br>\end{align}<br>$$<br>因此，要对特征向量X^Tu单位化：<br>$$<br>v=\frac{X^Tu}{||X^Tu||}=\frac{X^Tu}{\sqrt{u^TXX^Tu}}=\frac{X^Tu}{\sqrt{u^T\lambda u}}=\frac{X^Tu}{\sqrt{\lambda}}\<br>其中，u^Tu=1，v可以看作一个方向轴/维度\<br>记\alpha=\frac{u}{\sqrt{\lambda}}，为一个列向量v，所以：v=\sum_{i=1}^{N}\alpha_i\phi(x_i)<br>$$<br>但是，X^T仍然是未知的，所以v也是未知的，即高维度的特征空间的方向轴未知，但是，我们可以直接求Φ(xj)在特征空间v方向上的投影（这才是我们最终目的）：<br>$$<br>\begin{align}<br>v^T\phi(x_j)&amp;=\frac{u^TX\phi(x_j)}{\sqrt{\lambda}}\<br>&amp;=\frac{u^T}{\sqrt{\lambda}}\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}\phi(x_j)\<br>&amp;=\frac{u^T}{\sqrt{\lambda}}\begin{bmatrix}K(x_1,x_j)\…\K(x_N,x_j)\end{bmatrix}<br>\end{align}<br>$$</p>
+<p> 因此，我们只要求出核函数的特征值及其对应的单位特征向量，就可以得到高维空间的投影。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/30/PCA与LLE的理解/" data-id="cjmupgb2a0001t8r6vgn3sdar" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/03/LDA 的理解/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          LDA与KNDA的理解·
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/28/文献阅读003【精读】/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文献阅读003【精读】</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/10/04/LDA 的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/04/核函数的理解/">核函数的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/03/LDA 的理解/">LDA与KNDA的理解·</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/30/PCA与LLE的理解/">LLE (locally linear embedding)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/28/文献阅读003【精读】/">文献阅读003【精读】</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 zkchen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives/" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

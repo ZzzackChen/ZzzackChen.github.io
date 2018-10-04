@@ -7,13 +7,17 @@
   
   <title>Zzzack&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="LDA与KNDA的理解  参考： LDA  kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即： 其中，表示高维空间下的类间散度，类内散度，是单位正交化的特征向量矩阵，即高维空间中的坐标轴，这是未知的，难以直接计算的，需要借助核函数。 J(W^\phi)=argmax_{(W^\phi)}\f">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Zzzack&#39;s blogs">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/10/04/LDA 的理解/index.html">
 <meta property="og:site_name" content="Zzzack&#39;s blogs">
+<meta property="og:description" content="LDA与KNDA的理解  参考： LDA  kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即： 其中，表示高维空间下的类间散度，类内散度，是单位正交化的特征向量矩阵，即高维空间中的坐标轴，这是未知的，难以直接计算的，需要借助核函数。 J(W^\phi)=argmax_{(W^\phi)}\f">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-04T15:06:38.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Zzzack&#39;s blogs">
+<meta name="twitter:description" content="LDA与KNDA的理解  参考： LDA  kernel LDA kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即： 其中，表示高维空间下的类间散度，类内散度，是单位正交化的特征向量矩阵，即高维空间中的坐标轴，这是未知的，难以直接计算的，需要借助核函数。 J(W^\phi)=argmax_{(W^\phi)}\f">
   
     <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
   
@@ -60,9 +64,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-LDA 的理解" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-LDA 的理解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/04/LDA 的理解/" class="article-date">
   <time datetime="2018-10-04T15:04:27.047Z" itemprop="datePublished">2018-10-04</time>
@@ -112,356 +114,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-核函数的理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/04/核函数的理解/" class="article-date">
-  <time datetime="2018-10-04T02:13:30.867Z" itemprop="datePublished">2018-10-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/04/核函数的理解/">核函数的理解</a>
-    </h1>
+    <a href="/2018/10/04/核函数的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">核函数的理解</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考： 李航《统计学习方法》</p>
-<hr>
-<p>​    【定义】设<strong>X</strong>是输入空间，又设<strong>F</strong>为特征空间，如果存在一个从<strong>X</strong>到<strong>F</strong>的映射<br>$$<br>\phi(x):X -&gt;F<br>$$<br>使得所有的<strong>x,z∈X</strong>，函数<strong>K(x,z)</strong>满足条件<br>$$<br>K(x,z)=\phi(x)·\phi(z)<br>$$<br>则称<strong>K(x,z)</strong>为<strong>核函数</strong>，<strong>Φ(x)</strong>为映射函数，<strong>·</strong> 为内积运算。</p>
-<p>​    核函数的想法是，在学习与预测中只定义核函数<strong>K(x,z)</strong>，而不显式地定义<strong>Φ</strong>。直接计算<strong>K(x,z)</strong>比较容易，而通过<strong>Φ(x)</strong>,<strong>Φ(z)</strong>计算<strong>K(x,z)</strong>并不容易。</p>
-<p>​    【注意】特征空间<strong>F</strong>一般是高维的，对于给定的<strong>K(x,z)</strong>，<strong>F</strong>和<strong>Φ</strong>的取法并不唯一。</p>
-<hr>
-<p>常用的核函数：</p>
-<ol>
-<li><p>多项式核函数(<strong>polynomial kernel function</strong>)<br>$$<br>K(x,z)=(x·z+1)^p<br>$$</p>
-</li>
-<li><p>高斯核函数(<strong>Guussian kernel function</strong>)<br>$$<br>K(x,z)=exp(-\frac{||x-z||^2}{2\sigma^2})<br>$$</p>
-<table><tr><td bgcolor="lightgray">【<font color="red">个人理解</font>】这些常用的核函数，我尚未去验证，但姑且这样理解：X-&gt;F的路径不唯一(F也可以不同)，即Φ可以有千变万化的选择，那我们只要可以从核函数推导出其中一种Φ即可验证该核函数是合理的。而为什么这些核函数比较常用，即这些核函数的特点和优点在哪里，我暂时不去研讨。</td></tr></table>
-
-<p>可了解一下《统计学习方法》的“正定核”。</p>
-</li>
-</ol>
-<hr>
-<p>核函数的应用：</p>
-<p>见文章《PCA与LLE的理解》中的kernel PCA</p>
-<p>见文章《LDA的理解》中的kernel LDA</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/04/核函数的理解/" data-id="cjmupgb6p0004t8r6k4pfhjlp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-LDA 的理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/03/LDA 的理解/" class="article-date">
-  <time datetime="2018-10-03T02:50:01.011Z" itemprop="datePublished">2018-10-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/03/LDA 的理解/">LDA与KNDA的理解·</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考：<a href="https://blog.csdn.net/daunxx/article/details/51881956#%E7%BA%BF%E6%80%A7%E5%88%A4%E5%88%AB%E5%88%86%E6%9E%90linear-discriminant-analysis" target="_blank" rel="noopener">LDA </a>  <a href="https://blog.csdn.net/lizhe_dashuju/article/details/50329663" target="_blank" rel="noopener">kernel LDA</a></p>
-<p>kernel LDA 用到了散度(scatter)的概念，目标是使样本点在高维空间中的投影满足：类内散度最小，类间散度最大。即：<br>$$<br> J(W^\phi)=argmax_{(W^\phi)}\frac{W^{\phi T} S_b^\phi W^\phi}{W^{\phi T} S_w^\phi W^\phi}\<br>\begin{align}<br>其中，&amp;\phi 表示高维空间下的;\<br>&amp;S_b^\phi类间散度，S_b^\phi=\sum_{i=1}^{C}N_i(\mu_i-\mu)(\mu_i-\mu)^T; \<br>&amp;S_w^\phi类内散度，S_w^\phi=\sum_{i=1}^{C}\sum_{\phi(x_j)∈X_i}(\phi(x_j)-\mu_i)(\phi(x_j)-\mu_i)^T;\<br>&amp;W^\phi是单位正交化的特征向量矩阵，即高维空间中的坐标轴w^\phi，\<br>&amp;w^\phi=\sum_{i=1}^N\alpha_i\phi(x_i)这是未知的，难以直接计算的，需要借助核函数。\<br>\end{align}<br>$$<br>将核函数引入之后：<br>$$<br>J(\alpha)=argmax_{(\alpha)}\frac{|\alpha^TG_b\alpha|}{|\alpha^TG_w\alpha|}\<br>\begin{align}<br>其中，&amp;G_b=\sum_{i=1}^{C}N_i(m_i-\overline m)(m_i-\overline m)^T\<br>&amp;G_w=\sum_{i=1}^{C}\sum_{K_j∈X_i}(K_j-m_i)(K_j-m_i)^T\<br>&amp;m_i=\frac{1}{N_i}\sum_{j=1}{N_i}K_j\<br>&amp;K_j=(k(x_i,x_1),…,k(x_i,x_N))^T&amp;K_j为核函数矩阵的一个列向量<br>\end{align}\<br>$$</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/03/LDA 的理解/" data-id="cjmupgavi0000t8r6mtb0omzv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-PCA与LLE的理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/30/PCA与LLE的理解/" class="article-date">
-  <time datetime="2018-09-30T06:49:17.849Z" itemprop="datePublished">2018-09-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/30/PCA与LLE的理解/">LLE (locally linear embedding)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考： <a href="https://www.cnblogs.com/pinard/p/6266408.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">LLE原理总结</a></p>
-<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p><strong>PCA 降维的缺陷</strong>：高维空间各个样本之间存在一些线性关系，降维之后并没有保留这些关系。比如，在高维空间中，其最短路径并不是三维空间中的两点之间直线最短，而是如下图的曲面距离，而我们降维后，就变成了投影距离。<br><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109202628025-1407482296.png" alt=""></p>
-<p>因此，我们希望能够保留原空间的距离（只是一个例子），如下图，是将原曲面展开，而不是直接投影到平面中。</p>
-<p><img src="https://images2015.cnblogs.com/blog/1042406/201701/1042406-20170109201731541-419567891.jpg" alt=""></p>
-<p><strong>LLE 算法</strong>：</p>
-<p>与 PCA 不同的是，LLE 保留了高维空间的局部线性关系。<br>LLE在降维之前，先训练出每个样本与其最近的k个样本的线性关系——weights，再把该线性关系套用在降维空间后的每个样本。</p>
-<hr>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>参考：<a href="https://blog.csdn.net/baimafujinji/article/details/79376378" target="_blank" rel="noopener">PCA与kernel PCA</a></p>
-<p>【关于降维/冗余】</p>
-<p>如何理解冗余？</p>
-<p>如二维平面上，y=x 附近的数据点有很强的线性相关性，也就是说其中一维是冗余的，我们只要知道其中一维，就可以推出另一维，因此可以进行降维，对于本例可以进行平移+旋转，使其分布在x轴上。</p>
-<p>如何用数学来表示这种思想？</p>
-<p><strong>方差/协方差</strong>最大化，即投影后的点之间方差最大。方差和协方差的关系：当数据点<strong>归一化和中心化</strong>后，二者最大化的方法是等价的，一般直接求<strong>协方差</strong>的最大化。具体参考链接的公式推导。</p>
-<p>【kernel PCA】</p>
-<p>假设<strong>K</strong>是已知的。</p>
-<p>与上面的一样，我们同样要求<strong>协方差</strong>的最大化，<br>$$<br>\begin{align}<br>C&amp;=\sum_{i=1}^{N}\phi(x_i)\phi(x_i^T)\<br> &amp;=[\phi(x_1),…,\phi(x_N)]\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}\<br> &amp;=X^TX\</p>
-<p>\end{align}<br>$$</p>
-<p>但是，Φ是未知的，或者难以计算的，因此我们设法借助核函数来求解.<br>$$<br>\begin{align}<br>K&amp;=XX^T\<br>&amp;=\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}[\phi(x_1),…,\phi(x_N)]\<br>&amp;=\begin{bmatrix}\phi(x_1)^T\phi(x_1) &amp;… &amp;\phi(x_1)^T\phi(x_N)\<br>…&amp;…&amp;…\<br>\phi(x_N)^T\phi(x_1)&amp;…&amp;\phi(x_N)^T\phi(x_N)\end{bmatrix}\<br>&amp;=\begin{bmatrix}K(x_1,x_1) &amp;… &amp;K(x_1,x_N)\<br>…&amp;…&amp;…\<br>K(x_N,x_1)&amp;…&amp;K(x_N,x_N)\end{bmatrix}<br>\end{align}<br>$$<br>【注意】这里的K=XX^T和要求的协方差X^TX并不相等，但二者肯定存在某种关系：<br>$$<br>\begin{align}<br>XX^Tu&amp;=\lambda u&amp;u为单位化的特征向量\<br>X^TX(X^Tu)&amp;=\lambda (X^Tu) &amp;X^Tu为特征向量，但不一定是单位化的\<br>\end{align}<br>$$<br>因此，要对特征向量X^Tu单位化：<br>$$<br>v=\frac{X^Tu}{||X^Tu||}=\frac{X^Tu}{\sqrt{u^TXX^Tu}}=\frac{X^Tu}{\sqrt{u^T\lambda u}}=\frac{X^Tu}{\sqrt{\lambda}}\<br>其中，u^Tu=1，v可以看作一个方向轴/维度\<br>记\alpha=\frac{u}{\sqrt{\lambda}}，为一个列向量v，所以：v=\sum_{i=1}^{N}\alpha_i\phi(x_i)<br>$$<br>但是，X^T仍然是未知的，所以v也是未知的，即高维度的特征空间的方向轴未知，但是，我们可以直接求Φ(xj)在特征空间v方向上的投影（这才是我们最终目的）：<br>$$<br>\begin{align}<br>v^T\phi(x_j)&amp;=\frac{u^TX\phi(x_j)}{\sqrt{\lambda}}\<br>&amp;=\frac{u^T}{\sqrt{\lambda}}\begin{bmatrix}\phi(x_1)^T\…\\phi(x_N)^T\end{bmatrix}\phi(x_j)\<br>&amp;=\frac{u^T}{\sqrt{\lambda}}\begin{bmatrix}K(x_1,x_j)\…\K(x_N,x_j)\end{bmatrix}<br>\end{align}<br>$$</p>
-<p> 因此，我们只要求出核函数的特征值及其对应的单位特征向量，就可以得到高维空间的投影。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/30/PCA与LLE的理解/" data-id="cjmupgb2a0001t8r6vgn3sdar" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-文献阅读003【精读】" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/28/文献阅读003【精读】/" class="article-date">
-  <time datetime="2018-09-28T12:35:43.916Z" itemprop="datePublished">2018-09-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/28/文献阅读003【精读】/">文献阅读003【精读】</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>论文：<strong><em>2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></strong></p>
-<p><a href="https://pan.baidu.com/s/1XWx7q89zHl2h26_oA7r5BQ" target="_blank" rel="noopener">网盘链接</a>密码：10s5</p>
-<p>##摘要<br>本论文采用基于画像实现人脸识别系统，包括两大元素：画像合成+画像识别。<br>画像合成的方法：local linear preserving of geometry between photo and sketch images.<br>原理：<strong>locall linear embedding (LLE)</strong><br>画像识别的方法：nonlinear discriminate analysis<br>实验：600 photo-sketch pairs</p>
-<h2 id="1-INTRODUCTION"><a href="#1-INTRODUCTION" class="headerlink" title="1. INTRODUCTION"></a>1. INTRODUCTION</h2><p>画像识别可用于：在没有 probe face photo 的情况，我们用画家画出来的画像(drawn sketch)在 photo database 中搜索。<br>在直觉上，我们习惯将drwan sketch转换成photo，然后再从photo database中搜索。但这是一个病态问题(ill-pose problem),因为drawn sketch一般只有脸部的主要特征，忽略了许多细节。<br>因此，本文提出一种方法：将摄像头拍到的photo转换成pseudo-sketch，与[2002 ICIP Face photo recognition using sketch]一样，只是本论文是用<strong>非线性</strong>的转换方法。</p>
-<p>基于LLE的原理，本文将脸部分成许多patches（之间有部分重叠），对一个新图片的每个patch，从训练集中找出最近的K个patches。<br>如：脸部的嘴为一个patch，从训练集中的每张图找出和它最近的k个嘴的patches。<br>算法如下：</p>
-<pre><code>for i in range(N): // N = patches.sum()
-    1. p_k_neighbors[i] = KNN(I_p[i], training_photos) // k dimension
-    2. weights_k_p = minimize_error(I_p[i], k_neightbor[i])
-    3. I_s[i] = weights_k_p * s_k_neighbors[i] //s_k_neighbors[i] corresponding to p_k_neighbors[i]
-</code></pre><p>公式推导：参考LLE的推导 ==&gt; <a href="https://www.cnblogs.com/pinard/p/6266408.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">LLE原理总结</a></p>
-<p><strong>parameters</strong></p>
-<ol>
-<li>the number of neighbors<strong> K</strong></li>
-<li>the patch size</li>
-<li>the degree of overlapping</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20180930154250157?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="当K超过50时开始模糊"></p>
-<p><img src="/2018/09/28/文献阅读003【精读】/E:/8_blog\source\_posts\hexo_images\1538662790274.png" alt="1538662790274"></p>
-<p><img src="https://img-blog.csdn.net/20180930154324433?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="patch size"></p>
-<h2 id="3-Sketch-Recognition"><a href="#3-Sketch-Recognition" class="headerlink" title="3. Sketch Recognition"></a>3. Sketch Recognition</h2><p>采用<strong>KNDA</strong>(kernel-based nonlinear discriminant analysis)的方法，核函数为 <strong>polynomial kernel function</strong>:<br>$$<br>k(x_1,x_2) = (a(x_1·x_2)+b)^d<br>$$<br>本文将probe sketch 和 pseudo-sketch 投射到 KNDA的高维空间subspace，计算两者的距离：<br>$$<br>d=||y^r-y^p||\<br>y^r,y^p\ 为\ probe\ sketch，pseudo-sketch在高维空间中的投影<br>$$</p>
-<p> <strong>KNDA</strong> 的推导参考文章：《LDA与KNDA的理解》</p>
-<h2 id="4-EXPERIMENT"><a href="#4-EXPERIMENT" class="headerlink" title="4. EXPERIMENT"></a>4. EXPERIMENT</h2><p>略</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/28/文献阅读003【精读】/" data-id="cjmupgb7b0005t8r6ot4m69zd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-文献阅读002【精读】" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/25/文献阅读002【精读】/" class="article-date">
-  <time datetime="2018-09-25T12:10:35.359Z" itemprop="datePublished">2018-09-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/文献阅读002【精读】/">文献阅读002【精读】</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>2002 ICIP Face photo recognition using sketch</em><br><a href="https://pan.baidu.com/s/1f-if4wTu5sulbewODyB6xQ" target="_blank" rel="noopener">网盘链接</a> 密码：if7l</p>
-<ol start="0">
-<li>ABSTRACT</li>
-<li>INTRODUCTION</li>
-<li>SKETCH RECOGNITION<br> 2.1 Conventional eigenface method<br> 2.2 Eigensketch transformation</li>
-<li>EXPERIMENTS</li>
-<li>SUMMARY</li>
-</ol>
-<p><strong>2.1. Conventional eigenface method</strong><br>Eigenface method是人脸识别的有效方法之一，它在FERET（人脸数据库） test中表现出良好。<br>该方法使用<strong>KLT</strong>(Karhunen-Loeve Transform)来提取人脸的代表特征，该方法也叫<strong>PCA</strong>方法。<br>PCA算法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入：样本集D=&#123;x1,x2,...,xm&#125;, 低维维数k</span><br><span class="line">过程：</span><br><span class="line">1.数据中心化/归一化： xi = xi - μi</span><br><span class="line">2.计算协方差矩阵： XX^T</span><br><span class="line">3.对XX^T做奇异值分解</span><br><span class="line">4.取前k个最大的特征值对应的特征向量w1,w2,...,wk</span><br><span class="line">输出：投影矩阵W=&#123;w1,w2,...,wk&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdn.net/20180925162723467?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="相当于1中的μi"></p>
-<p>Qi 表示一张图像的<strong>向量(column vector)</strong>，Qu 表示平均值，以下为中心化/归一化：</p>
-<p><img src="https://img-blog.csdn.net/20180925162941626?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="中心化/归一化"></p>
-<p><img src="https://img-blog.csdn.net/20180925163218759?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>P 为所有样本向量归一化后合起来（训练集）的<strong>矩阵</strong>，W 为协方差矩阵(covariance matrix)：</p>
-<p><img src="https://img-blog.csdn.net/20180925163306268?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>经过奇异值分解（SVD）得到 <strong>特征向量</strong>组成的矩阵Vp, <strong>特征值</strong>组成的对角矩阵Λp。</p>
-<p>这里有个地方要【注意】：由于W为N阶矩阵（N为图像的像素总数，即 Pi 的长度），对其直接进行SVD的话，计算量太大。因此我们可以先对W的转置SVD，由于P为NxM的矩阵，M为向量个数（即训练及大小），M&lt;&lt;N，所以计算量大大降低。</p>
-<p><img src="https://img-blog.csdn.net/20180925164444116?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>两边同时左乘P：</p>
-<p><img src="https://img-blog.csdn.net/20180925165206663?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdn.net/20180925170129673?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>【重要】<br>–求<strong>PP^T</strong>的<strong>标准正交化矩阵</strong>：<br>–我们是先用SVD求出<strong>P^TP标准正交化矩阵</strong>的，即Vp，<strong>Vp^-1=Vp^T</strong>。而我们要求的是<strong>PP^T</strong>的标准正交化矩阵，如上面的等式，我们<strong>不能保证PVp是标准正交化矩阵</strong>，因此要对其标准正交化，得到如下，可以验证 <strong>EpEp^T=I</strong>。（具体推导可参考《PCA与LLE的理解》）</p>
-<p><img src="https://img-blog.csdn.net/20180925170345965?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>因此，对于一个新的图片Pk，经过Ep的变换后，得到特征向量 bp :</p>
-<p><img src="https://img-blog.csdn.net/20180925180439934?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><strong>2.2. Eigensketch transformation</strong></p>
-<p>【重要】<br>对于上列等式，两边同时左乘Ep，由于Ep是标准正交矩阵，有<strong>Pk=Ep*bp</strong>，但是经过Ep<strong>降维</strong>后，这里的等号实际上是<strong>有损失</strong>的，所以记Pk为Pr，即<strong>重构</strong>的photo：</p>
-<p><img src="https://img-blog.csdn.net/20180925182047933?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>将Ep代入：</p>
-<p><img src="https://img-blog.csdn.net/20180925182339146?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdn.net/20180925182634873?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>–<strong>这里的 cp 和Pk有什么关系吗？</strong><br>–有。cp和bp有关，而 bp=Ep^T<strong>Pk</strong>。<br>所以我们可以由<strong>样本集原图线性组合起来近似</strong>表示<strong>新的图片</strong>的：</p>
-<p><img src="https://img-blog.csdn.net/20180925183022904?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>同理，我们把画像原始图（sketch）也按这个线性组合重构：</p>
-<p><img src="https://img-blog.csdn.net/20180925183152271?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>如图2（Figure2），我们由(a)-&gt;(b)得到线性组合 cp，再用该线性组合(d)-&gt;(c）.</p>
-<p><img src="https://img-blog.csdn.net/20180925183420875?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><strong>3. EXPERIMENTS</strong><br>用188对不同人脸的原始图和画像图(photo-sketch pairs)。<br>训练集：88 photo-sketch pairs<br>测试集：100 photo-sketch pairs<br>同时，还设置三组不同方法进行比较，分别为：几何法（geometry），传统法（conventional），以及本论文的方法。<br>试验采用 <strong>FERET test protocol</strong>（一种人脸识别算法评估方法），将测试集的photo作为<strong>gallery set</strong>，sketch作为<strong>probe set</strong>，计算相似度，如下表。</p>
-<p><img src="https://img-blog.csdn.net/20180925184518331?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><strong>相似度计算过程</strong>：<br>从测试集的gallery set选取一张photo: Pk，用训练集的88张photos来重构得到Pr，求出cp，再用cp来将训练集中的sketches结合起来表示Sr’，最后与测试集的probe set中的sketches作比较，计算相似度。如下图：</p>
-<p><img src="https://img-blog.csdn.net/20180926162149265?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="计算相似度"></p>
-<p>FERET Sep96 protocol 相关链接：<br><a href="https://www.researchgate.net/publication/258246350_The_FERET_Verification_Testing_Protocol_for_Face_Recognition_Algorithms" target="_blank" rel="noopener">The_FERET_Verification_Testing_Protocol_for_Face_Recognition_Algorithms</a></p>
-<p><strong>应用</strong></p>
-<p>当警方没有嫌疑犯的照片(photo)，只有根据目击证人的描述画出的画像(sketch)，虽然有监控摄像头，但是当摄像头监控到嫌疑犯的时候，由于摄像头拍到的是photo，与sketch差别太大，无法匹配成功，因此需要用一个模型将摄像头拍到的photo转换成pseudo-sketch，再与sketch匹配成功率就比较高了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/25/文献阅读002【精读】/" data-id="cjmupgb6l0002t8r6zwcr1ch8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-文献阅读001" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/21/文献阅读001/" class="article-date">
-  <time datetime="2018-09-21T07:57:22.727Z" itemprop="datePublished">2018-09-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/21/文献阅读001/">文献阅读001</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文献题目如下：</p>
-<h5 id="1-2002-ICIP-Face-photo-recognition-using-sketch"><a href="#1-2002-ICIP-Face-photo-recognition-using-sketch" class="headerlink" title="[1] 2002 ICIP Face photo recognition using sketch"></a><em>[1] 2002 ICIP Face photo recognition using sketch</em></h5><h5 id="2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition"><a href="#2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition" class="headerlink" title="[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition"></a><em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></h5><h5 id="3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis"><a href="#3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis" class="headerlink" title="[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis"></a><em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></h5><p>本周刚入实验室，粗略地阅读张老师推荐的三篇论文，了解一下研究方向。</p>
-<ol>
-<li>大方向：人脸识别（face recognition)</li>
-<li>小方向：基于素描图像的方法（based on sketch)</li>
-</ol>
-<p><strong>背景</strong>：<br>以往人脸识别都是基于原始图片（based on photo）识别，但当要识别一个嫌疑犯，而又没有照片时只能用根据目击者描述画出素描画像（sketch）代替。因此需要<strong>将拍摄到的原始图片转换为素描图片，再与素描图库对比检索</strong>。</p>
-<p><strong>论文主要内容</strong>：</p>
-<h5 id="1-2002-ICIP-Face-photo-recognition-using-sketch-1"><a href="#1-2002-ICIP-Face-photo-recognition-using-sketch-1" class="headerlink" title="[1] 2002 ICIP Face photo recognition using sketch"></a><em>[1] 2002 ICIP Face photo recognition using sketch</em></h5><ol>
-<li>提取人脸特征的传统方法(Conventional eigenface method):KLT</li>
-<li>基于素描的方法(Eigensketch transformation)</li>
-</ol>
-<h5 id="2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition-1"><a href="#2-2005-CVPR-a-nonlinear-approach-for-face-sketch-synthesis-and-recognition-1" class="headerlink" title="[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition"></a><em>[2] 2005 CVPR a nonlinear approach for face sketch synthesis and recognition</em></h5><p>该论文分为两大工作：<strong>转换</strong> 和 <strong>识别</strong></p>
-<ol>
-<li>转换：该论文是基于<strong>LLE</strong>方法，用 photo-sketch pair 训练集训练出来的<strong>模型（P)</strong> 自动生成 pseudo-sketch。</li>
-<li>识别：由于画家画的素描难免有偏差，以及pseudo-sketch会有模糊，因此用<strong>KNDA</strong>方法。</li>
-</ol>
-<p><strong>问题</strong>：LLE，linear v.s nonlinear 等知识点还未了解。</p>
-<h5 id="3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis-1"><a href="#3-2017-Data-driven-vs-model-driven-Fast-face-sketch-synthesis-1" class="headerlink" title="[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis"></a><em>[3] 2017 Data-driven vs. model-driven Fast face sketch synthesis</em></h5><p><strong>Data-driven</strong>:<br>data-driven 是在模块水平（<strong>patch level</strong>）进行训练的，模型包括两个：Neighbor Selection Model, Neighbor Fusion Model（如下图）<br>作者列举了许多data-driven 的方法，说明了其劣势所在：在选择Neighbor Selection Model 时要遍历整个training photo-sketch pairs, 耗时太大。<br><img src="https://img-blog.csdn.net/20180921153148260?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p><strong>问题</strong>：patch division是怎么完成的？——partition mask（如下图）<br><strong>Model driven</strong>:<br>训练：将photo-sketch pairs 分成许多patches，训练出许多Mapping functions.<br>测试：将photo分成许多patches，用训练出的Mapping functions生成对应的sketch。<br><img src="https://img-blog.csdn.net/20180921154638237?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80Mjk4OTg1MA==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p>
-<p>只是初步了解一下方向，具体的原理，公式，算法还没有深入了解。阅读中遇到一些不懂的知识点直接跳过，如rigid regression， LLE， KNDA等等。后面会对每一篇再做进一步的阅读和总结。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/09/21/文献阅读001/" data-id="cjmupgb6n0003t8r6l0z9k2gy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
