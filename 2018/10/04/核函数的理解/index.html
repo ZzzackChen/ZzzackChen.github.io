@@ -7,17 +7,17 @@
   
   <title>核函数的理解 | Zzzack&#39;s blogs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义Φ。直接">
+  <meta name="description" content="核函数的理解参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地">
 <meta property="og:type" content="article">
 <meta property="og:title" content="核函数的理解">
 <meta property="og:url" content="http://yoursite.com/2018/10/04/核函数的理解/index.html">
 <meta property="og:site_name" content="Zzzack&#39;s blogs">
-<meta property="og:description" content="参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义Φ。直接">
+<meta property="og:description" content="核函数的理解参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-04T14:58:56.421Z">
+<meta property="og:updated_time" content="2018-10-04T16:44:34.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="核函数的理解">
-<meta name="twitter:description" content="参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地定义Φ。直接">
+<meta name="twitter:description" content="核函数的理解参考： 李航《统计学习方法》  ​    【定义】设X是输入空间，又设F为特征空间，如果存在一个从X到F的映射$$\phi(x):X -&amp;gt;F$$使得所有的x,z∈X，函数K(x,z)满足条件$$K(x,z)=\phi(x)·\phi(z)$$则称K(x,z)为核函数，Φ(x)为映射函数，· 为内积运算。 ​    核函数的想法是，在学习与预测中只定义核函数K(x,z)，而不显式地">
   
     <link rel="alternate" href="/atom.xml" title="Zzzack&#39;s blogs" type="application/atom+xml">
   
@@ -86,7 +86,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考： 李航《统计学习方法》</p>
+        <h1 id="核函数的理解"><a href="#核函数的理解" class="headerlink" title="核函数的理解"></a>核函数的理解</h1><p>参考： 李航《统计学习方法》</p>
 <hr>
 <p>​    【定义】设<strong>X</strong>是输入空间，又设<strong>F</strong>为特征空间，如果存在一个从<strong>X</strong>到<strong>F</strong>的映射<br>$$<br>\phi(x):X -&gt;F<br>$$<br>使得所有的<strong>x,z∈X</strong>，函数<strong>K(x,z)</strong>满足条件<br>$$<br>K(x,z)=\phi(x)·\phi(z)<br>$$<br>则称<strong>K(x,z)</strong>为<strong>核函数</strong>，<strong>Φ(x)</strong>为映射函数，<strong>·</strong> 为内积运算。</p>
 <p>​    核函数的想法是，在学习与预测中只定义核函数<strong>K(x,z)</strong>，而不显式地定义<strong>Φ</strong>。直接计算<strong>K(x,z)</strong>比较容易，而通过<strong>Φ(x)</strong>,<strong>Φ(z)</strong>计算<strong>K(x,z)</strong>并不容易。</p>
@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/04/核函数的理解/" data-id="cjmuqjdvm00055wr6eyhlw8nh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/10/04/核函数的理解/" data-id="cjmut9boj000560r6n5lbxfm3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,10 +168,6 @@
       <ul>
         
           <li>
-            <a href="/2018/10/05/文献阅读003【精读】1/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2018/10/05/PCA与LLE的理解/">(no title)</a>
           </li>
         
@@ -185,6 +181,10 @@
         
           <li>
             <a href="/2018/10/04/LDA 的理解/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/04/核函数的理解/">核函数的理解</a>
           </li>
         
       </ul>
